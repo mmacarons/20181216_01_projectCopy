@@ -1,14 +1,21 @@
 package kr.tjit.a20181216_01_projectcopy.adapters;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.TedPermission;
 
 import java.util.List;
 
@@ -42,6 +49,7 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant> {
         TextView addressTxt = row.findViewById(R.id.addressTxt);
         TextView openTimeTxt = row.findViewById(R.id.openTimeTxt);
         ImageView logoImgView = row.findViewById(R.id.logoImgView);
+        Button callBtn = row.findViewById(R.id.callBtn);
 
         Restaurant data = mList.get(position);
 
@@ -49,6 +57,36 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant> {
         addressTxt.setText(data.getAddress());
         openTimeTxt.setText(data.getOpenTime());
         Glide.with(mContext).load(data.getLogoURL()).into(logoImgView);
+
+        callBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+//                전화를 바로 걸기. 01012345678
+
+                PermissionListener pl = new PermissionListener() {
+                    @Override
+                    public void onPermissionGranted() {
+//                        전화 거는 권한이 승인되었다면, 실제로 전화를 검.
+                        Uri uri = Uri.parse("tel:01012345678");
+                        Intent intent = new Intent(Intent.ACTION_CALL, uri);
+                        mContext.startActivity(intent);
+                    }
+
+                    @Override
+                    public void onPermissionDenied(List<String> deniedPermissions) {
+                        Toast.makeText(mContext, "전화를 걸기 위해선 권한 승인이 필요합니다.", Toast.LENGTH_SHORT).show();
+                    }
+                };
+
+                TedPermission
+                        .with(mContext)
+                        .setPermissionListener(pl)
+                        .setPermissions(Manifest.permission.CALL_PHONE)
+                        .check();
+
+            }
+        });
 
         return row;
 
