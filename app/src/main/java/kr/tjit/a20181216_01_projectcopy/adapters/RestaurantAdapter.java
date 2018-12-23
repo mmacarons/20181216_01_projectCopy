@@ -16,8 +16,9 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant> {
 
     Context mContext;
     List<Restaurant> mList;
-    LayoutInflater inf;
+    LayoutInflater inf;     // XML -> JAVA에서 활용가능하게 그려주는 역할. 인플레이팅.
 
+//    생성자
     public RestaurantAdapter(Context mContext, List<Restaurant> mList) {
         super(mContext, R.layout.restaurant_list_item, mList);
 
@@ -29,13 +30,9 @@ public class RestaurantAdapter extends ArrayAdapter<Restaurant> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
         View row = convertView;
-
         if (row == null) {
-
             row = inf.inflate(R.layout.restaurant_list_item, null);
-
         }
 
         TextView nameTxt = row.findViewById(R.id.nameTxt);
