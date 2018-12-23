@@ -72,8 +72,8 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
 
-//            첫번째 방법: 원초적인 방법임. v가 가진 id를 비교해서 각각의 이벤트를 적용
-//            별로 효율적이지 못 함.
+//                첫번째 방법: 원초적인 방법임. v가 가진 id를 비교해서 각각의 이벤트를 적용
+//                별로 효율적이지 못 함.
 /*
                 if (v.getId() == R.id.chickenBtn) {
                     Toast.makeText(mContext, "치킨 눌림", Toast.LENGTH_SHORT).show();
@@ -83,9 +83,14 @@ public class MainActivity extends BaseActivity {
                 }
 */
 
-//            두번째 방법: xml에 태그를 달아서 메모처럼 활용
-//            view는 각각의 리니어레이아웃을 의미
-                Toast.makeText(mContext, v.getTag().toString(), Toast.LENGTH_SHORT).show();
+//                두번째 방법: xml에 태그를 달아서 메모처럼 활용
+//                view는 각각의 리니어레이아웃을 의미
+//                Toast.makeText(mContext, v.getTag().toString(), Toast.LENGTH_SHORT).show();
+
+//                인텐트에 어떤 종류의 음식인지 첨부해서 레스토랑 목록화면 이동
+                Intent intent = new Intent(mContext, RestaurantListActivity.class);
+                intent.putExtra("음식종류", v.getTag().toString());
+                startActivity(intent);
 
 
             }
