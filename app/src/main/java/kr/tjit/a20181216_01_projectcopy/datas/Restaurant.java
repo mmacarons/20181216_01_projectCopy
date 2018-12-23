@@ -5,18 +5,27 @@ public class Restaurant {
     private String name;
     private String address;
     private String openTime;
+    private String logoURL;
 
 //    alt + insert
 
-
-//    생성자
-    public Restaurant(String name, String address, String openTime) {
+    //    생성자
+    public Restaurant(String name, String address, String openTime, String logoURL) {
         this.name = name;
         this.address = address;
         this.openTime = openTime;
+        this.logoURL = logoURL;
     }
 
-//    getter + setter
+    public String getLogoURL() {
+        return logoURL;
+    }
+
+    public void setLogoURL(String logoURL) {
+        this.logoURL = logoURL;
+    }
+
+    //    getter + setter
     public String getName() {
         return name;
     }
