@@ -9,13 +9,14 @@ import com.nhn.android.maps.NMapView;
 public class NaverMapActivity extends NMapActivity {
 
     private NMapView mMapView;
-    private String CLIENT_ID = "임시로 작성";
+    private String CLIENT_ID = "6oZr65RHcwxob0MoZmAq";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mMapView = new NMapView(NaverMapActivity.this);
         setContentView(mMapView);
+
         mMapView.setClientId(CLIENT_ID);
         mMapView.setClickable(true);
         mMapView.setEnabled(true);
